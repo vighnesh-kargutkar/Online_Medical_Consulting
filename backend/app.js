@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const PORT = 3000;
 
 const doctorRoutes = require("./routes/doctorRoutes");
-const patientRoute = require('./routes/patientRoutes')
+const patientRoute = require("./routes/patientRoutes");
 const { patientLogin } = require("./controllers/patientController");
 
 app.use(bodyParser.json());
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/doctor", doctorRoutes);
-app.use('/patient', patientRoute)
+app.use("/patient", patientRoute);
 
 mongoose
   .connect(

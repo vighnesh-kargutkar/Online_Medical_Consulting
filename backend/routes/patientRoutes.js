@@ -1,9 +1,9 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const patientController = require('../controllers/patientController')
+const patientController = require("../controllers/patientController");
 
-router.get('/login',patientController.GetPatientLogin)
-router.post('/login',patientController.PostPatientLogin)
+router.get("/login", patientController.GetPatientLogin);
+router.get("/login/check", patientController.CheckPatientLogin);
 
-module.exports = router
+module.exports = router;

@@ -13,6 +13,7 @@ export default function LoginPage() {
     email: false,
     password: false,
   });
+  const [errors, setError] = useState();
   const navigate = useNavigate();
 
   function handleChange(name, value) {
@@ -47,26 +48,38 @@ export default function LoginPage() {
     navigate("/SignUp");
   }
   async function Login() {
-    if (enteredValues.email.includes('@') || enteredValues.password != "") {
-      const response = await axios.post(
-        "http://localhost:3000/patient/login",
-        enteredValues
-      );
-      
-      console.log(response);
-      if (response.status!=200) {
-        response.statusText
-        // setError("Fetching events failed.");
+    try {
+      if (enteredValues.email.includes("@") || enteredValues.password != "") {
+        const response = await axios.get(
+          "http://localhost:3000/patient/login/check",
+          { params: enteredValues }
+        );
+
+        console.log(response);
+        if (response.status != 200) {
+          response.statusText;
+          setError("Fetching events failed.");
+        } else {
+          const resData = response.data;
+          console.log(resData);
+          navigate("/home");
+        }
       } else {
-        const resData =  response.data
-        console.log(resData);
+        setCheckEdit({
+          email: true,
+          password: true,
+        });
       }
-      // navigate('/login')
-    } else {
-      setCheckEdit({
-        email: true,
-        password: true,
-      });
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        if (error.response.data.error == "Email not found") {
+          navigate("/SignUp");
+        }
+        setError("Unauthorized access - 401 error");
+        // Handle redirect to login or show error message
+      } else {
+        setError("Error:", error.message);
+      }
     }
   }
 
@@ -88,6 +101,9 @@ export default function LoginPage() {
           <img src={Logo} alt="" />
           <h1>RHSC Login</h1>
           <div className={classes.div_col}>
+            <label htmlFor="" className={classes.label}>
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -101,6 +117,9 @@ export default function LoginPage() {
           </div>
 
           <div className={classes.div_col}>
+            <label htmlFor="" className={classes.label}>
+              Password
+            </label>
             <input
               id="password"
               type="password"
@@ -112,6 +131,11 @@ export default function LoginPage() {
             />
             {invalidPassword && <p className={classes.error}>Enter password</p>}
           </div>
+          {errors && (
+            <div className={classes.div_row}>
+              <p>errros</p>
+            </div>
+          )}
           <div className={classes.div_row}>
             <button
               className={classes.button_flat}
