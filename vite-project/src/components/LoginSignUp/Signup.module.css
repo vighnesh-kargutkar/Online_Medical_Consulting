@@ -60,3 +60,9 @@
 .select:focus{
     outline: none; 
 }
+.error{
+    font-size:medium;
+    color: #e14545;
+    text-align: center;
+    /* color: #e46363; */
+}

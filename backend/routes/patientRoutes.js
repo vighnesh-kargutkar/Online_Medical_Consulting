@@ -3,7 +3,8 @@ const router = express.Router();
 
 const patientController = require("../controllers/patientController");
 
-router.get("/login", patientController.GetPatientLogin);
-router.get("/login/check", patientController.CheckPatientLogin);
+router.get("/login", patientController.GetLogin);
+router.get("/login/check", patientController.CheckLogin);
+router.post("/SignUp/Save", patientController.PostSignUpData);
 
 module.exports = router;

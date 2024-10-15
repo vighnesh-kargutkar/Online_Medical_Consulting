@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import Logo from "../../../public/LOGO.jpg";
 import { Helmet } from "react-helmet";
@@ -74,8 +74,8 @@ export default function LoginPage() {
       if (error.response && error.response.status === 404) {
         if (error.response.data.error == "Email not found") {
           navigate("/SignUp");
-        }
-        setError("Unauthorized access - 401 error");
+        } else if (error.response.data.error == "Password Not match")
+          setError("Invalid password");
         // Handle redirect to login or show error message
       } else {
         setError("Error:", error.message);
@@ -101,6 +101,7 @@ export default function LoginPage() {
           <img src={Logo} alt="" />
           <h1>RHSC Login</h1>
           <div className={classes.div_col}>
+            {errors && <p className={classes.error}>{errors}</p>}
             <label htmlFor="" className={classes.label}>
               Email
             </label>
@@ -131,11 +132,11 @@ export default function LoginPage() {
             />
             {invalidPassword && <p className={classes.error}>Enter password</p>}
           </div>
-          {errors && (
+          {/* {errors && (
             <div className={classes.div_row}>
               <p>errros</p>
             </div>
-          )}
+          )} */}
           <div className={classes.div_row}>
             <button
               className={classes.button_flat}
