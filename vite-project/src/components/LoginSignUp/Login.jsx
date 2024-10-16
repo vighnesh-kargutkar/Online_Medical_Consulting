@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import Logo from "../../../public/LOGO.jpg";
 import { Helmet } from "react-helmet";
-import Modal from "./Modal";
 import { useRef } from "react";
+import ResultModal from "./Modal";
 export default function LoginPage() {
   const dialog = useRef();
   const [enteredValues, setEnteredValues] = useState({
@@ -95,7 +95,7 @@ export default function LoginPage() {
   }
   return (
     <Fragment>
-      <Modal
+      <ResultModal
         ref={dialog}
         message="Email not found Create a account"
         navlink="SignUp"

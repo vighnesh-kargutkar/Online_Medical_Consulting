@@ -42,8 +42,8 @@ exports.PostSignUpData = async (req, res) => {
     const FindEmailExist = await PatientData.find({ email: email });
     if (FindEmailExist.length != 0) {
       return res.status(404).json({
-        error: "Email already exixt Login again",
-        message: `Email already exixt Login again: ${email}`,
+        error: "Email already exist Login again",
+        message: `Email already exist Login again: ${email}`,
       });
     }
     const patient = new PatientData({
