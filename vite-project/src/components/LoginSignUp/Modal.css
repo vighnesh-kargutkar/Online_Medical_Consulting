@@ -1,0 +1,44 @@
+
+.result-modal {
+    position: fixed;           
+    top: 50%;                  
+    left: 50%;                 
+    transform: translate(-50%, -50%); 
+    z-index: 1000;             
+    width: 400px;             
+    padding: 20px;            
+    background-color: white;  
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;        
+  }
+  
+  .result-modal[open] {
+    animation: slide-in-from-top 0.35s ease-out;
+  }
+  
+  .result-modal::backdrop {
+    background: rgba(0, 0, 0, 0.9);
+  }
+  .result-modal form{
+    align-items: center;
+  }
+  .result-modal button {
+    border-radius: 5px;
+    border: 2px solid #2d2b2b;
+    font-size:large;
+    list-style: none;
+    padding: 8px;
+    color: #fff;
+    background-color: #2d2b2b;
+  }
+  
+  .result-modal button:hover {
+    border: 2px solid #2d2b2b;
+    border-radius: 18px; 
+    background-color: #fff;
+    color: #2d2b2b;
+    font-size: large;
+    list-style: none;
+    padding: 8px;
+    border-radius: 5px;
+  }

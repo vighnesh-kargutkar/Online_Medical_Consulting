@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import Logo from "../../../public/LOGO.jpg";
 import { Helmet } from "react-helmet";
+import Modal from "./Modal";
+import { useRef } from "react";
 export default function LoginPage() {
+  const dialog = useRef();
   const [enteredValues, setEnteredValues] = useState({
     email: "",
     password: "",
@@ -73,7 +76,8 @@ export default function LoginPage() {
     } catch (error) {
       if (error.response && error.response.status === 404) {
         if (error.response.data.error == "Email not found") {
-          navigate("/SignUp");
+          // navigate("/SignUp");
+          dialog.current.open();
         } else if (error.response.data.error == "Password Not match")
           setError("Invalid password");
         // Handle redirect to login or show error message
@@ -85,18 +89,21 @@ export default function LoginPage() {
 
   const invalidEMail = checkEdit.email && !enteredValues.email.includes("@");
   const invalidPassword = checkEdit.password && enteredValues.password == "";
-  // console.log(checkEdit.password, enteredValues.password == null);
 
   function handleSUbmited(event) {
     event.preventDefault();
-    // console.log(enteredValues);
   }
   return (
     <Fragment>
+      <Modal
+        ref={dialog}
+        message="Email not found Create a account"
+        navlink="SignUp"
+      />
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <form onSubmit={handleSUbmited}>
+      <form onSubmit={handleSUbmited} className={classes.form}>
         <div className={classes.div1}>
           <img src={Logo} alt="" />
           <h1>RHSC Login</h1>
