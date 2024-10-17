@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Doctor Consultation</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f9;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+        /* Header */
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            font-size: 1.2em;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-image: url('https://www.example.com/doctor-image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero h2 {
+            font-size: 3em;
+        }
+        .hero p {
+            font-size: 1.2em;
+        }
+        .hero a {
+            padding: 10px 20px;
+            background-color: #28A745;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .services h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .service-box {
+            display: flex;
+            justify-content: space-around;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            max-width: 1000px;
+        }
+        .service {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .service h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .service p {
+            font-size: 1em;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .about h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .about p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .contact-form h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .contact-form form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .contact-form input[type="submit"] {
+            background-color: #28A745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 15px;
+        }
+        .contact-form input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343A40;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Doctor Online</h1>
+        <nav>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Consult with Expert Doctors Online</h2>
+        <p>Your health is our priority. Get reliable consultation from licensed doctors anytime, anywhere.</p>
+        <a href="#contact">Book a Consultation</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-box">
+            <div class="service">
+                <h3>General Consultation</h3>
+                <p>Discuss your health issues and get advice from experienced doctors.</p>
+            </div>
+            <div class="service">
+                <h3>Specialist Consultation</h3>
+                <p>Consult with specialists across various fields like cardiology, dermatology, etc.</p>
+            </div>
+            <div class="service">
+                <h3>Prescriptions</h3>
+                <p>Receive electronic prescriptions for your medications right after consultation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>We are an online doctor consultation platform dedicated to providing affordable and accessible healthcare. Our team of licensed professionals is here to help you manage your health from the comfort of your home.</p>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="contact-form">
+        <h2>Contact Us</h2>
+        <form action="#" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <input type="submit" value="Send Message">
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Doctor Online. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
