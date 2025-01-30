@@ -24,7 +24,7 @@ export default function MainNavigation() {
             >
               Consult
             </NavLink>
-            {/* <NavLink
+            <NavLink
               to="/Medicine"
               className={({ isActive }) =>
                 isActive ? classes.liiactive : classes.lii
@@ -39,7 +39,7 @@ export default function MainNavigation() {
               }
             >
               Disease
-            </NavLink> */}
+            </NavLink>
           </ul>
         </nav>
       </main>
