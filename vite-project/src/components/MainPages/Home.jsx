@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import "./Home.css";
 import classes from "./Homeclass.module.css";
@@ -7,6 +7,18 @@ import HomeCard from "../Cards/HomeCard";
 import docimage from "../../assets/DocImage.jpg";
 
 export default function HomePage() {
+  const [doctype, setDoctype] = useState("");
+  useEffect(() => {
+    async function DocterType() {
+      const response = await fetch("http://localhost:3000/doctor/doctorType");
+      const data = await response.json();
+      // {
+      //   data.map((item, index) => console.log(item));
+      // }
+      setDoctype(data);
+    }
+    DocterType();
+  }, []);
   return (
     <Fragment>
       <Outlet />
@@ -30,6 +42,23 @@ export default function HomePage() {
           header="Find medicine"
           data="order medicine"
         />
+      </div>
+      <div className={classes.div1}>
+        <h1>Consult top doctors online for any health concern</h1>
+        <h3>
+          Private online consultations with verified doctors in all specialists
+        </h3>
+        {!doctype && <h1 className={classes.h1tag}>Loading ...</h1>}
+        {doctype && (
+          <div className={classes.div2}>
+            {doctype.map((item, index) => (
+              <div className={classes.div3} key={index}>
+                <h2>{item._id} specialists</h2>
+                <p>Number of Doctors {item.count}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </Fragment>
   );

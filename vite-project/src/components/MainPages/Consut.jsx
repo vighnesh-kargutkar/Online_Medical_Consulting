@@ -18,7 +18,7 @@ export default function ConsultPage() {
       <Helmet>
         <title>Consult</title>
       </Helmet>
-      <h2>Doctor list</h2>
+      <h1 className={classes.h1tag}>Doctor list</h1>
       {!doctorData && <p>Loading ...</p>}
       {doctorData && (
         <div className={classes.div1}>

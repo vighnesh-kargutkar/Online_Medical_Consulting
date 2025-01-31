@@ -5,10 +5,10 @@
     align-items: center;
     justify-content: center;
     color: #191919;
-    width:fit-content; 
-    height: 800px; 
+    /* width:fit-content; 
+    height: 700px; 
     overflow-y: auto; 
-    overflow-x: hidden; 
+    overflow-x: hidden;  */
 }
 .div2{
     margin: 2rem;
@@ -28,4 +28,10 @@
     /* border: 2px solid #666666; */
     /* padding: 2rem; */
     /* border-radius: 25px; */
+}
+.h1tag{
+    padding:20px 0;
+    text-align: center;
+    /* color: #00A8FF; */
+    background-color: #fff;
 }
