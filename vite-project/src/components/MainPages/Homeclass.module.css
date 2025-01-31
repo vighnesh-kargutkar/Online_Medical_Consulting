@@ -1,6 +1,9 @@
 .cards {
     display: flex;
-    flex-direction: row;
+    flex-direction: row ;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     justify-content:space-around;
 }
 .h1tag{
@@ -10,8 +13,10 @@
     background-color: #fff;
 }
 .card {
+    margin: 2rem;
+    padding: 1rem;
     background-color:aquamarine;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content:space-around; */
 }
