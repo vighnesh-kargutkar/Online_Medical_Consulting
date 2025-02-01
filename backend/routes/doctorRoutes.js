@@ -5,5 +5,6 @@ const doctorController = require("../controllers/doctorController");
 
 router.get("/doctorData", doctorController.getDoctordata);
 router.get("/doctorType", doctorController.getDoctortype);
+router.get("/doctorspecialty", doctorController.getDoctorspecialty);
 
 module.exports = router;

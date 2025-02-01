@@ -19,3 +19,10 @@ exports.getDoctortype = async (req, res, next) => {
     console.log(error);
   }
 };
+
+exports.getDoctorspecialty = async (req, res, next) => {
+  const docData = await Doctordata.find({ specialty: "Otolaryngologist" });
+  const data = JSON.stringify(docData);
+  // console.log(data);
+  res.send(data);
+};

@@ -12,9 +12,6 @@ export default function HomePage() {
     async function DocterType() {
       const response = await fetch("http://localhost:3000/doctor/doctorType");
       const data = await response.json();
-      // {
-      //   data.map((item, index) => console.log(item));
-      // }
       setDoctype(data);
     }
     DocterType();
