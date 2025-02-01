@@ -1,5 +1,9 @@
 const PatientData = require("../models/patient");
 const moment = require("moment");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET;
+
 exports.GetLogin = async (req, res) => {
   try {
     console.log(req);
@@ -22,7 +26,10 @@ exports.CheckLogin = async (req, res) => {
       });
     }
     if (p_data._doc.password == password) {
-      res.send(p_data);
+      const token = jwt.sign({ email: p_data._doc.email }, JWT_SECRET, {
+        expiresIn: "1h",
+      });
+      res.send({ p_data, token });
     } else {
       return res.status(404).json({
         error: "Password Not match",

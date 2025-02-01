@@ -65,6 +65,7 @@ export default function LoginPage() {
         } else {
           const resData = response.data;
           console.log(resData);
+          localStorage.setItem("token", resData.token);
           navigate("/home");
         }
       } else {

@@ -6,27 +6,31 @@ import classes from "./Homeclass.module.css";
 import { Link, Outlet } from "react-router-dom";
 import HomeCard from "../Cards/HomeCard";
 import docimage from "../../assets/DocImage.jpg";
+const token = localStorage.getItem("token");
 
 export default function HomePage() {
   const [doctype, setDoctype] = useState("");
   useEffect(() => {
     async function DocterType() {
-      const response = await axios("http://localhost:3000/doctor/doctorType");
-      const resData = response.data;
-      setDoctype(resData);
+      const response = await axios.get(
+        "http://localhost:3000/doctor/doctorType",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status != 200) {
+        console.log(response);
+      } else {
+        const resData = response.data;
+        setDoctype(resData);
+      }
     }
     DocterType();
   }, []);
-  async function HandleClick(doctorspecialty) {
-    console.log(doctorspecialty);
-    const data = { specialty: doctorspecialty };
-    const response = await axios.get(
-      "http://localhost:3000/doctor/doctorspecialty",
-      { params: data }
-    );
-    const resData = response.data;
-    console.log(resData);
-  }
+
   return (
     <Fragment>
       <Outlet />
