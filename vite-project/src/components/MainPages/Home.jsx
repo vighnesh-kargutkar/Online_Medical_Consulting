@@ -1,8 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 import "./Home.css";
 import classes from "./Homeclass.module.css";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import HomeCard from "../Cards/HomeCard";
 import docimage from "../../assets/DocImage.jpg";
 
@@ -10,12 +11,22 @@ export default function HomePage() {
   const [doctype, setDoctype] = useState("");
   useEffect(() => {
     async function DocterType() {
-      const response = await fetch("http://localhost:3000/doctor/doctorType");
-      const data = await response.json();
-      setDoctype(data);
+      const response = await axios("http://localhost:3000/doctor/doctorType");
+      const resData = response.data;
+      setDoctype(resData);
     }
     DocterType();
   }, []);
+  async function HandleClick(doctorspecialty) {
+    console.log(doctorspecialty);
+    const data = { specialty: doctorspecialty };
+    const response = await axios.get(
+      "http://localhost:3000/doctor/doctorspecialty",
+      { params: data }
+    );
+    const resData = response.data;
+    console.log(resData);
+  }
   return (
     <Fragment>
       <Outlet />
@@ -52,6 +63,7 @@ export default function HomePage() {
               <div className={classes.div3} key={index}>
                 <h2>{item._id} specialists</h2>
                 <p>Number of Doctors {item.count}</p>
+                <Link to={`/doctorspecialty/${item._id}`}>Select</Link>
               </div>
             ))}
           </div>
