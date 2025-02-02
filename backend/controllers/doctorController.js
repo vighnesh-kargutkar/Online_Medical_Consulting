@@ -27,3 +27,10 @@ exports.getDoctorspecialty = async (req, res, next) => {
   // console.log(data);
   res.send(data);
 };
+
+exports.getDoctorID = async (req, res, next) => {
+  const { id } = req.query;
+  const docData = await Doctordata.findById({ _id: id });
+  const data = JSON.stringify(docData);
+  res.send(data);
+};

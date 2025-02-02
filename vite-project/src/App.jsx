@@ -14,6 +14,7 @@ import MainNavigation from "./components/Navigation/MainNavigation.jsx";
 import SelectedDoctors, {
   loader as SelectedDoctorsloader,
 } from "./components/MainPages/SelectedDoctors.jsx";
+import Bookpage, { loader as BookpageLoader } from "./components/book/book.jsx";
 // https://rxnav.nlm.nih.gov/REST/RxTerms/allconcepts.json
 // https://rxnav.nlm.nih.gov/REST/drugs.json?name=
 
@@ -46,6 +47,11 @@ const router = createBrowserRouter([
         path: "/Consult",
         element: <ConsultPage />,
         loader: ConsultPageLoader,
+      },
+      {
+        path: "/bookappointment/:_id",
+        element: <Bookpage />,
+        loader: BookpageLoader,
       },
       {
         path: "/Medicine",
