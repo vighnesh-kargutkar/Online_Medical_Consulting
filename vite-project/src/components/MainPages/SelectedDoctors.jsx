@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useLoaderData, defer, useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
 import CardComp from "../Cards/Card";
 import classes from "../Cards/Card.module.css";
 import { useEffect } from "react";
