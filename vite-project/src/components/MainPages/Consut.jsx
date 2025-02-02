@@ -1,15 +1,21 @@
-import { Fragment, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import CardComp from "../Cards/Card";
 import classes from "../Cards/Card.module.css";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function ConsultPage() {
-  const { result } = useLoaderData();
+  const { result, error } = useLoaderData();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (error == "Invalid Token") {
+      navigate("/login");
+    }
+  }, [error]);
   const doctorData = result;
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>Consult</title>
       </Helmet>
@@ -22,7 +28,7 @@ export default function ConsultPage() {
           ))}
         </div>
       )}
-    </Fragment>
+    </>
   );
 }
 
@@ -38,9 +44,13 @@ export async function loader() {
         },
       }
     );
-    const resData = response.data;
-    return { result: resData };
+    if (response.status != 200) {
+      return response;
+    } else {
+      const resData = response.data;
+      return { result: resData };
+    }
   } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 }

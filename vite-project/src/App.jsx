@@ -2,7 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import LoginPage from "./components/LoginSignUp/Login.jsx";
 import SignupPage from "./components/LoginSignUp/Signup.jsx";
-import HomePage from "./components/MainPages/Home.jsx";
+import HomePage, {
+  loader as HomePageLoader,
+} from "./components/MainPages/Home.jsx";
 import ConsultPage, {
   loader as ConsultPageLoader,
 } from "./components/MainPages/Consut.jsx";
@@ -23,10 +25,12 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+        loader: HomePageLoader,
       },
       {
         path: "/home",
         element: <HomePage />,
+        loader: HomePageLoader,
       },
       {
         path: "/doctorspecialty",

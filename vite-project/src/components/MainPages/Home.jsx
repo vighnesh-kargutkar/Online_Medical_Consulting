@@ -1,38 +1,29 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import "./Home.css";
 import classes from "./Homeclass.module.css";
-import { Link, Outlet } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLoaderData,
+  useNavigate,
+  json,
+} from "react-router-dom";
 import HomeCard from "../Cards/HomeCard";
 import docimage from "../../assets/DocImage.jpg";
-const token = localStorage.getItem("token");
 
 export default function HomePage() {
-  const [doctype, setDoctype] = useState("");
+  const { result, error } = useLoaderData();
+  const navigate = useNavigate();
   useEffect(() => {
-    async function DocterType() {
-      const response = await axios.get(
-        "http://localhost:3000/doctor/doctorType",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.status != 200) {
-        console.log(response);
-      } else {
-        const resData = response.data;
-        setDoctype(resData);
-      }
+    if (error == "Invalid Token") {
+      navigate("/login");
     }
-    DocterType();
-  }, []);
-
+  }, [error]);
+  const doctype = result;
   return (
-    <Fragment>
+    <>
       <Outlet />
       <Helmet>
         <title>Home</title>
@@ -73,6 +64,36 @@ export default function HomePage() {
           </div>
         )}
       </div>
-    </Fragment>
+    </>
   );
+}
+
+export async function loader() {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(
+      "http://localhost:3000/doctor/doctorType",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status != 200) {
+      return response;
+    } else {
+      const resData = response.data;
+      return { result: resData };
+    }
+  } catch (error) {
+    if (error.response) {
+      return json(
+        { error: error.response.data.error },
+        { status: error.response.status }
+      );
+    } else {
+      throw json({ error: "Network error, please try again" }, { status: 500 });
+    }
+  }
 }
