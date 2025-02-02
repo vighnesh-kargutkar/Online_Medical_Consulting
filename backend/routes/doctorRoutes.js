@@ -5,7 +5,7 @@ const authMiddleware = require("../auth");
 const doctorController = require("../controllers/doctorController");
 
 router.get("/doctorData", authMiddleware, doctorController.getDoctordata);
-router.get("/doctorType", authMiddleware, doctorController.getDoctortype);
+router.get("/doctorType", doctorController.getDoctortype);
 router.get(
   "/doctorspecialty",
   authMiddleware,

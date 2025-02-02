@@ -4,18 +4,24 @@ import classes from "../Cards/Card.module.css";
 import axios from "axios";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ConsultPage() {
   const { result, error } = useLoaderData();
   const navigate = useNavigate();
   useEffect(() => {
     if (error == "Invalid Token") {
-      navigate("/login");
+      toast.error("Login to continue...", { autoClose: 2000 });
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     }
   }, [error]);
   const doctorData = result;
   return (
     <>
+      <ToastContainer />
       <Helmet>
         <title>Consult</title>
       </Helmet>
@@ -35,6 +41,7 @@ export default function ConsultPage() {
 export async function loader() {
   try {
     const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
     const response = await axios.get(
       "http://localhost:3000/doctor/doctorData",
       {
@@ -42,6 +49,7 @@ export async function loader() {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+        params: { email: email },
       }
     );
     if (response.status != 200) {
@@ -51,6 +59,16 @@ export async function loader() {
       return { result: resData };
     }
   } catch (error) {
-    return error.response.data;
+    if (error.response) {
+      return {
+        error: error.response.data.error,
+        status: error.response.status,
+      };
+    } else {
+      return {
+        error: "Network error, please try again",
+        status: 500,
+      };
+    }
   }
 }

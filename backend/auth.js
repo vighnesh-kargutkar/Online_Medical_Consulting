@@ -5,8 +5,13 @@ const authMiddleware = (req, res, next) => {
   if (!token) return res.status(401).json({ error: "Access Denied" });
   try {
     const verified = jwt.verify(token.split(" ")[1], JWT_SECRET);
-    req.user = verified;
-    next();
+    // console.log("email:", req.query.email);
+    // console.log(verified);
+    if (req.query.email == verified.email) {
+      next();
+    } else {
+      res.status(400).json({ error: "Invalid Token" });
+    }
   } catch (error) {
     res.status(400).json({ error: "Invalid Token" });
   }

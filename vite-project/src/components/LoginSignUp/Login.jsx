@@ -65,6 +65,7 @@ export default function LoginPage() {
         } else {
           const resData = response.data;
           console.log(resData);
+          localStorage.setItem("email", enteredValues.email);
           localStorage.setItem("token", resData.token);
           navigate("/home");
         }

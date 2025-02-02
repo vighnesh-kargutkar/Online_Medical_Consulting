@@ -1,26 +1,13 @@
-import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import "./Home.css";
 import classes from "./Homeclass.module.css";
-import {
-  Link,
-  Outlet,
-  useLoaderData,
-  useNavigate,
-  json,
-} from "react-router-dom";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 import HomeCard from "../Cards/HomeCard";
 import docimage from "../../assets/DocImage.jpg";
 
 export default function HomePage() {
-  const { result, error } = useLoaderData();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (error == "Invalid Token") {
-      navigate("/login");
-    }
-  }, [error]);
+  const { result } = useLoaderData();
   const doctype = result;
   return (
     <>
@@ -70,16 +57,7 @@ export default function HomePage() {
 
 export async function loader() {
   try {
-    const token = localStorage.getItem("token");
-    const response = await axios.get(
-      "http://localhost:3000/doctor/doctorType",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await axios.get("http://localhost:3000/doctor/doctorType");
     if (response.status != 200) {
       return response;
     } else {
@@ -88,12 +66,15 @@ export async function loader() {
     }
   } catch (error) {
     if (error.response) {
-      return json(
-        { error: error.response.data.error },
-        { status: error.response.status }
-      );
+      return {
+        error: error.response.data.error,
+        status: error.response.status,
+      };
     } else {
-      throw json({ error: "Network error, please try again" }, { status: 500 });
+      return {
+        error: "Network error, please try again",
+        status: 500,
+      };
     }
   }
 }
