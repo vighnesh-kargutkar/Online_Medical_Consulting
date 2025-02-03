@@ -24,7 +24,7 @@ export default function Bookpage() {
         <h2>specalist {DoctorData.specialty} </h2>
         <h2>Loaction {DoctorData.location}</h2>
         <h2>Book Slot</h2>
-        <h2>Fees</h2>
+        <h2>Fees {DoctorData.fees}</h2>
       </div>
     </>
   );
