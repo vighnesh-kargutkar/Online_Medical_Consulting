@@ -3,8 +3,29 @@ import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+const generateTimeSlots = () => {
+  const times = [];
+  for (let hour = 0; hour < 24; hour++) {
+    for (let minute of [0, 30]) {
+      const time = new Date();
+      time.setHours(hour, minute, 0, 0);
+      const formattedTime = time.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+      times.push(formattedTime);
+    }
+  }
+  return times;
+};
 
 export default function Bookpage() {
+  const [selectedTime, setSelectedTime] = useState("");
+  const timeSlots = generateTimeSlots();
+
   const { result, error } = useLoaderData();
   console.log(result);
   const navigate = useNavigate();
@@ -24,6 +45,19 @@ export default function Bookpage() {
         <h2>specalist {DoctorData.specialty} </h2>
         <h2>Loaction {DoctorData.location}</h2>
         <h2>Book Slot</h2>
+        <div>
+          <select
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+          >
+            <option value="">Select Time</option>
+            {timeSlots.map((time, index) => (
+              <option key={index} value={time}>
+                {time}
+              </option>
+            ))}
+          </select>
+        </div>
         <h2>Fees {DoctorData.fees}</h2>
       </div>
     </>
