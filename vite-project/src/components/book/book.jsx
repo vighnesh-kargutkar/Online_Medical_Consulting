@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import classes from "../book/book.module.css";
 
 const generateTimeSlots = () => {
   const times = [];
@@ -40,6 +41,7 @@ export default function Bookpage() {
   const DoctorData = result;
   return (
     <>
+      <h1 className={classes.h1tag}>Doctors detail </h1>
       <div>
         <h2>Name {DoctorData.name}</h2>
         <h2>specalist {DoctorData.specialty} </h2>
